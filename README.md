@@ -1,4 +1,4 @@
-# LABMedical - MedSoft Group
+# Desafio BrickUp - Tasks!
 
 <img src=".../../src/img/home.png" alt="tela-inicial">
 
