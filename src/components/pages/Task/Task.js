@@ -35,6 +35,7 @@ function Task() {
   }, [id]);
 
   function editTask(task) {
+    console.log(task.get("image"))
     setMessage("");
 
     fetch(`http://localhost:8080/api/tasks/${id}`, {

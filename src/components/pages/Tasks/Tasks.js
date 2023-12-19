@@ -67,7 +67,7 @@ function Tasks() {
             <TaskCard
               id={task.id}
               description={task.description}
-              hasImage={task.linkImage}
+              image={task.linkImage}
               status={task.status}
               key={task.id}
               handleRemove={removeTask}

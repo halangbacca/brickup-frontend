@@ -10,8 +10,8 @@ import { taskActions } from "../../../actions/taskActions";
 
 import styles from "./TaskCard.module.css";
 
-function TaskCard({ id, description, status, hasImage, handleRemove }) {
-  const [image, setImage] = useState([]);
+function TaskCard({ id, description, status, image, handleRemove }) {
+  const [imagePath, setImagePath] = useState([]);
 
   const remove = (e) => {
     e.preventDefault();
@@ -25,7 +25,7 @@ function TaskCard({ id, description, status, hasImage, handleRemove }) {
     })
       .then((resp) => {
         if (resp.ok) {
-          setImage(resp.url);
+          setImagePath(resp.url);
         }
       })
       .catch((err) => console.log(err));
@@ -35,8 +35,8 @@ function TaskCard({ id, description, status, hasImage, handleRemove }) {
     <div className={styles.task_card}>
       <h4>{description}</h4>
 
-      {hasImage !== null && (
-        <a href={image}>
+      {image !== null && (
+        <a href={imagePath}>
           <BsCardImage />
         </a>
       )}
