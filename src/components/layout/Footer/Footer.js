@@ -7,12 +7,20 @@ function Footer() {
     <footer className={styles.footer}>
       <ul className={styles.social_list}>
         <li>
-          <a href="https://github.com/halangbacca" target="_blank">
+          <a
+            href="https://github.com/halangbacca"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <FaGithub />
           </a>
         </li>
         <li>
-          <a href="https://www.linkedin.com/in/halanbacca/" target="_blank">
+          <a
+            href="https://www.linkedin.com/in/halanbacca/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <FaLinkedin />
           </a>
         </li>

@@ -37,18 +37,9 @@ function Task() {
   function editTask(task) {
     setMessage("");
 
-    if (task.description === "") {
-      setMessage("A descrição é obrigatória!");
-      setType("error");
-      return;
-    }
-
-    fetch(`http://localhost:8080/api/tasks/${task.id}`, {
+    fetch(`http://localhost:8080/api/tasks/${id}`, {
       method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(task),
+      body: task,
     })
       .then((resp) => resp.json())
       .then((data) => {

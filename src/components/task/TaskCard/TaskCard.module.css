@@ -23,6 +23,10 @@
   font-weight: bold;
 }
 
+.task_card a {
+  color: #7a7a7a;
+}
+
 .task_card_actions {
   margin-top: 1.2em;
   display: flex;

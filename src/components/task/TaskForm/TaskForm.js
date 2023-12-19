@@ -2,6 +2,12 @@ import { useState } from "react";
 
 import styles from "./TaskForm.module.css";
 
+import { store } from "../../../reducers/store";
+
+import { taskActions } from "../../../actions/taskActions";
+
+import { connect } from "react-redux";
+
 import Input from "../../form/Input/Input";
 import Select from "../../form/Select/Select";
 import SubmitButton from "../../form/SubmitButton/SubmitButton";
@@ -11,7 +17,20 @@ function TaskForm({ handleSubmit, btnText, taskData }) {
 
   const submit = (e) => {
     e.preventDefault();
-    handleSubmit(task);
+    var img = e.target[1].files[0];
+
+    const formData = new FormData();
+    formData.append("description", task.description);
+    formData.append("image", img);
+
+    if (task.status !== undefined) {
+      formData.append("status", task.status);
+    } else {
+      formData.append("status", "PENDENTE");
+    }
+
+    store.dispatch(taskActions.add(task));
+    handleSubmit(formData);
   };
 
   function handleChange(e) {
@@ -19,20 +38,24 @@ function TaskForm({ handleSubmit, btnText, taskData }) {
   }
 
   return (
-    <form onSubmit={submit} className={styles.form}>
+    <form
+      onSubmit={submit}
+      className={styles.form}
+      encType="multipart/form-data"
+    >
       <Input
         type="text"
         text="Descrição da tarefa"
         name="description"
         placeholder="Insira a descrição da tarefa"
+        required="true"
         handleOnChange={handleChange}
         value={task.description ? task.description : ""}
       />
       <Input
-        type="text"
-        text="Imagem"
+        type="file"
+        text="Envie uma imagem"
         name="image"
-        placeholder="Insira uma imagem"
         handleOnChange={handleChange}
         value={task.image ? task.image : ""}
       />
@@ -47,4 +70,15 @@ function TaskForm({ handleSubmit, btnText, taskData }) {
   );
 }
 
-export default TaskForm;
+const mapStateToProps = (state) => ({
+  tasks: state.taskReducer.tasks,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  add: (task) => dispatch(taskActions.add(task)),
+  getAll: () => dispatch(taskActions.requestGetAll()),
+  remove: (task) => dispatch(taskActions.remove(task)),
+  update: (task) => dispatch(taskActions.update(task)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(TaskForm);
